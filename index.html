@@ -1,84 +1,155 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Pokémon Gallery</title>
-    <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pokémon Gallery</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* Dark mode styles */
+    body.dark-mode {
+      background-color: #121212;
+      color: white;
+    }
+    body.dark-mode h1,
+    body.dark-mode h2,
+    body.dark-mode p,
+    body.dark-mode select {
+      color: white;
+    }
+    body.dark-mode .card {
+      background-color: #333;
+      border: 1px solid #555;
+    }
+    body.dark-mode #darkModeToggle {
+      background-color: #555;
+      color: white;
+      border: none;
+    }
+
+    /* Pink mode styles */
+    body.pink-mode {
+      background-color: #ffe0f0;
+      color: #900048;
+    }
+    body.pink-mode h1,
+    body.pink-mode h2,
+    body.pink-mode p,
+    body.pink-mode select {
+      color: #900048;
+    }
+    body.pink-mode .card {
+      background-color: #ffd6e8;
+      color: #900048;
+      border: 1px solid #900048;
+    }
+    body.pink-mode #pinkModeToggle {
+      background-color: #900048;
+      color: #ffe0f0;
+      border: none;
+    }
+
+    /* Pink tint all images in pink mode */
+    body.pink-mode .card img {
+      filter: sepia(0.6) saturate(5) hue-rotate(320deg) brightness(1.1);
+      transition: filter 0.3s ease;
+    }
+  </style>
 </head>
 <body>
-    <h1>Pokémon Gallery</h1>
-    <h2>Explore Your Favorite Pokémon!</h2>
-    <select id="filter">
-        <option value="all">All</option>
-        <option value="Electric">Electric</option>
-        <option value="Grass">Grass</option>
-        <option value="Fire">Fire</option>
-        <option value="Water">Water</option>
-        <option value="Psychic">Psychic</option>
-        <option value="Normal">Normal</option>
-        <option value="Ghost">Ghost</option>
-        <option value="Dragon">Dragon</option>
-    </select>
-    <main class="gallery">
-        <div class="card" data-type="Electric">
-            <img src="assets/pikachu.png" alt="Pikachu" />
-            <p>Pikachu</p>
-        </div>
-        <div class="card" data-type="Grass">
-            <img src="assets/bulbasaur.png" alt="Bulbasaur" />
-            <p>Bulbasaur</p>
-        </div>
-        <div class="card" data-type="Fire">
-            <img src="assets/charmander.png" alt="Charmander" />
-            <p>Charmander</p>
-        </div>
-        <div class="card" data-type="Water">
-            <img src="assets/squirtle.png" alt="Squirtle" />
-            <p>Squirtle</p>
-        </div>
-        <div class="card" data-type="Normal">
-            <img src="assets/jigglypuff.png" alt="Jigglypuff" />
-            <p>Jigglypuff</p>
-        </div>
-        <div class="card" data-type="Psychic">
-            <img src="assets/mew.png" alt="Mew" />
-            <p>Mew</p>
-        </div>
-        <div class="card" data-type="Normal">
-            <img src="assets/eevee.png" alt="Eevee" />
-            <p>Eevee</p>
-        </div>
-        <div class="card" data-type="Normal">
-            <img src="assets/snorlax.png" alt="Snorlax" />
-            <p>Snorlax</p>
-        </div>
-        <div class="card" data-type="Ghost">
-            <img src="assets/gengar.png" alt="Gengar" />
-            <p>Gengar</p>
-        </div>
-        <div class="card" data-type="Water">
-            <img src="assets/lapras.png" alt="Lapras" />
-            <p>Lapras</p>
-        </div>
-        <div class="card" data-type="Water">
-            <img src="assets/vaporeon.png" alt="Vaporeon" />
-            <p>Vaporeon</p>
-        </div>
-        <div class="card" data-type="Electric">
-            <img src="assets/jolteon.png" alt="Jolteon" />
-            <p>Jolteon</p>
-        </div>
-        <div class="card" data-type="Fire">
-            <img src="assets/flareon.png" alt="Flareon" />
-            <p>Flareon</p>
-        </div>
-        <!-- Add any other cards here -->
-    </main>
+  <h1>Pokémon Gallery</h1>
+  <h2>Explore Your Favorite Pokémon!</h2>
 
-    <!-- NEW BUTTON -->
-    <button id="darkModeToggle">Toggle Dark Mode</button>
+  <button id="darkModeToggle">Toggle Dark Mode</button>
+  <button id="pinkModeToggle">Toggle Pink Mode</button>
 
+  <select id="filter">
+    <option value="all">All</option>
+    <option value="Electric">Electric</option>
+    <option value="Grass">Grass</option>
+    <option value="Fire">Fire</option>
+    <option value="Water">Water</option>
+    <option value="Psychic">Psychic</option>
+    <option value="Normal">Normal</option>
+    <option value="Ghost">Ghost</option>
+    <option value="Dragon">Dragon</option>
+  </select>
+
+  <main class="gallery">
+    <div class="card" data-type="Electric">
+      <img src="assets/pikachu.png" alt="Pikachu" />
+      <p>Pikachu</p>
+    </div>
+    <div class="card" data-type="Grass">
+      <img src="assets/bulbasaur.png" alt="Bulbasaur" />
+      <p>Bulbasaur</p>
+    </div>
+    <div class="card" data-type="Fire">
+      <img src="assets/charmander.png" alt="Charmander" />
+      <p>Charmander</p>
+    </div>
+    <div class="card" data-type="Water">
+      <img src="assets/squirtle.png" alt="Squirtle" />
+      <p>Squirtle</p>
+    </div>
+    <div class="card" data-type="Normal">
+      <img src="assets/jigglypuff.png" alt="Jigglypuff" />
+      <p>Jigglypuff</p>
+    </div>
+    <div class="card" data-type="Psychic">
+      <img src="assets/mew.png" alt="Mew" />
+      <p>Mew</p>
+    </div>
+    <div class="card" data-type="Normal">
+      <img src="assets/eevee.png" alt="Eevee" />
+      <p>Eevee</p>
+    </div>
+    <div class="card" data-type="Normal">
+      <img src="assets/snorlax.png" alt="Snorlax" />
+      <p>Snorlax</p>
+    </div>
+    <div class="card" data-type="Ghost">
+      <img src="assets/gengar.png" alt="Gengar" />
+      <p>Gengar</p>
+    </div>
+    <div class="card" data-type="Water">
+      <img src="assets/lapras.png" alt="Lapras" />
+      <p>Lapras</p>
+    </div>
+    <div class="card" data-type="Water">
+      <img src="assets/vaporeon.png" alt="Vaporeon" />
+      <p>Vaporeon</p>
+    </div>
+    <div class="card" data-type="Electric">
+      <img src="assets/jolteon.png" alt="Jolteon" />
+      <p>Jolteon</p>
+    </div>
+    <div class="card" data-type="Fire">
+      <img src="assets/flareon.png" alt="Flareon" />
+      <p>Flareon</p>
+    </div>
+  </main>
+
+  <script>
+    const darkToggle = document.getElementById('darkModeToggle');
+    const pinkToggle = document.getElementById('pinkModeToggle');
+
+    darkToggle.addEventListener('click', () => {
+      document.body.classList.toggle('dark-mode');
+      // Ensure pink mode is off when dark mode is toggled on
+      if (document.body.classList.contains('dark-mode')) {
+        document.body.classList.remove('pink-mode');
+      }
+    });
+
+    pinkToggle.addEventListener('click', () => {
+      document.body.classList.toggle('pink-mode');
+      // Ensure dark mode is off when pink mode is toggled on
+      if (document.body.classList.contains('pink-mode')) {
+        document.body.classList.remove('dark-mode');
+      }
+    });
+  </script>
 </body>
 </html>
 
