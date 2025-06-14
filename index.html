@@ -49,10 +49,38 @@
       border: none;
     }
 
-    /* Pink tint all images in pink mode */
     body.pink-mode .card img {
       filter: sepia(0.6) saturate(5) hue-rotate(320deg) brightness(1.1);
       transition: filter 0.3s ease;
+    }
+
+    /* Card layout styles */
+    .gallery {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      padding: 1rem;
+    }
+
+    .card {
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      padding: 1rem;
+      width: 150px;
+      text-align: center;
+      background-color: #f9f9f9;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+
+    .card:hover {
+      transform: scale(1.05);
+    }
+
+    img {
+      width: 100px;
+      height: 100px;
+      object-fit: contain;
     }
   </style>
 </head>
@@ -128,16 +156,15 @@
       <img src="assets/flareon.png" alt="Flareon" />
       <p>Flareon</p>
     </div>
-    <!-- Add any other cards here -->
   </main>
 
   <script>
+    // Dark Mode Toggle
     const darkToggle = document.getElementById('darkModeToggle');
     const pinkToggle = document.getElementById('pinkModeToggle');
 
     darkToggle.addEventListener('click', () => {
       document.body.classList.toggle('dark-mode');
-      // Ensure pink mode is off when dark mode is toggled on
       if (document.body.classList.contains('dark-mode')) {
         document.body.classList.remove('pink-mode');
       }
@@ -145,10 +172,30 @@
 
     pinkToggle.addEventListener('click', () => {
       document.body.classList.toggle('pink-mode');
-      // Ensure dark mode is off when pink mode is toggled on
       if (document.body.classList.contains('pink-mode')) {
         document.body.classList.remove('dark-mode');
       }
+    });
+
+    // Card click interaction
+    const cards = document.querySelectorAll('.card');
+    cards.forEach(card => {
+      card.addEventListener('click', () => {
+        alert(`You clicked ${card.querySelector('p').textContent}!`);
+      });
+    });
+
+    // Filter by Pokémon type
+    const filterSelect = document.getElementById('filter');
+    const filterByType = (type) => {
+      cards.forEach(card => {
+        const pokemonType = card.dataset.type;
+        card.style.display = (type === 'all' || pokemonType === type) ? 'flex' : 'none';
+      });
+    };
+
+    filterSelect.addEventListener('change', (e) => {
+      filterByType(e.target.value);
     });
   </script>
 </body>
