@@ -6,7 +6,7 @@
   <title>Pokémon Gallery</title>
   <link rel="stylesheet" href="style.css" />
   <style>
-    /* Dark mode styles */
+    /* Dark Mode */
     body.dark-mode {
       background-color: #121212;
       color: white;
@@ -24,34 +24,74 @@
     body.dark-mode #darkModeToggle {
       background-color: #555;
       color: white;
-      border: none;
     }
 
-    /* Pink mode styles */
+    /* Pink Mode */
     body.pink-mode {
       background-color: #ffe0f0;
       color: #900048;
     }
-    body.pink-mode h1,
-    body.pink-mode h2,
-    body.pink-mode p,
-    body.pink-mode select {
-      color: #900048;
-    }
     body.pink-mode .card {
       background-color: #ffd6e8;
-      color: #900048;
       border: 1px solid #900048;
+      color: #900048;
     }
     body.pink-mode #pinkModeToggle {
       background-color: #900048;
       color: #ffe0f0;
-      border: none;
     }
-
     body.pink-mode .card img {
       filter: sepia(0.6) saturate(5) hue-rotate(320deg) brightness(1.1);
-      transition: filter 0.3s ease;
+    }
+
+    /* Green Mode */
+    body.green-mode {
+      background-color: #e0ffe0;
+      color: #004d00;
+    }
+    body.green-mode h1,
+    body.green-mode h2,
+    body.green-mode p,
+    body.green-mode select {
+      color: #004d00;
+    }
+    body.green-mode .card {
+      background-color: #ccffcc;
+      border: 1px solid #004d00;
+      color: #004d00;
+    }
+    body.green-mode #greenModeToggle {
+      background-color: #004d00;
+      color: #e0ffe0;
+    }
+    body.green-mode .card img {
+      filter: sepia(0.3) saturate(4) hue-rotate(90deg) brightness(1.05);
+    }
+
+    /* Layout */
+    .gallery {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      padding: 1rem;
+    }
+    .card {
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      padding: 1rem;
+      width: 150px;
+      text-align: center;
+      background-color: #f9f9f9;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+    .card:hover {
+      transform: scale(1.05);
+    }
+    img {
+      width: 100px;
+      height: 100px;
+      object-fit: contain;
     }
 
     /* Card layout styles */
@@ -90,6 +130,7 @@
 
   <button id="darkModeToggle">Toggle Dark Mode</button>
   <button id="pinkModeToggle">Toggle Pink Mode</button>
+  <button id="greenModeToggle">Toggle Green Mode</button>
 
   <select id="filter">
     <option value="all">All</option>
@@ -162,19 +203,51 @@
     // Dark Mode Toggle
     const darkToggle = document.getElementById('darkModeToggle');
     const pinkToggle = document.getElementById('pinkModeToggle');
+    const greenToggle = document.getElementById('greenModeToggle');
 
     darkToggle.addEventListener('click', () => {
       document.body.classList.toggle('dark-mode');
+<<<<<<< HEAD
       if (document.body.classList.contains('dark-mode')) {
         document.body.classList.remove('pink-mode');
       }
+=======
+      document.body.classList.remove('pink-mode', 'green-mode');
+>>>>>>> feature/green-mode-images
     });
 
     pinkToggle.addEventListener('click', () => {
       document.body.classList.toggle('pink-mode');
+<<<<<<< HEAD
       if (document.body.classList.contains('pink-mode')) {
         document.body.classList.remove('dark-mode');
       }
+=======
+      document.body.classList.remove('dark-mode', 'green-mode');
+    });
+
+    greenToggle.addEventListener('click', () => {
+      document.body.classList.toggle('green-mode');
+      document.body.classList.remove('dark-mode', 'pink-mode');
+    });
+
+    const cards = document.querySelectorAll('.card');
+    cards.forEach(card => {
+      card.addEventListener('click', () => {
+        alert(`You clicked ${card.querySelector('p').textContent}!`);
+      });
+    });
+
+    const filterSelect = document.getElementById('filter');
+    const filterByType = (type) => {
+      cards.forEach(card => {
+        const pokemonType = card.dataset.type;
+        card.style.display = (type === 'all' || pokemonType === type) ? 'flex' : 'none';
+      });
+    };
+
+    filterSelect.addEventListener('change', (e) => {
+      filterByType(e.target.value);
     });
 
     // Card click interaction
